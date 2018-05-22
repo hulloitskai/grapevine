@@ -1,0 +1,191 @@
+{
+  "ignition": {
+    "config": {},
+    "timeouts": {
+      "httpResponseHeaders": 10,
+      "httpTotal": 30
+    },
+    "version": "2.1.0"
+  },
+  "networkd": {},
+  "passwd": {
+    "users": [
+      {
+        "groups": ["sudo", "docker"],
+        "name": "dev",
+        "passwordHash":
+          "$6$rounds=8192$3vsN5GTvt$RdwYqtTfr/PQJ1DL.yQSYM1RJ/oOi6lRcRDLmpT3JQczhn9E0qoC7KvK9mjb5fZsNEBvQhHL2DIL9dOswgEv8/",
+        "primaryGroup": "users",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL6DIQ+E+sAaDni3VJlnxDJp6LF0s1r6SmbU6P1YMHtQ stevenxie"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "filesystem": "root",
+        "group": {},
+        "path": "/etc/ssh/sshd_config",
+        "user": {},
+        "contents": {
+          "source":
+            "data:,UsePrivilegeSeparation%20sandbox%0ASubsystem%20sftp%20internal-sftp%0AClientAliveInterval%20180%0AUseDNS%20no%0AUsePAM%20no%0A%0APermitRootLogin%20no%0AAllowUsers%20core%20dev%0AAuthenticationMethods%20publickey%0APrintMotd%20no%0A",
+          "verification": {}
+        },
+        "mode": 384
+      },
+      {
+        "filesystem": "root",
+        "group": {},
+        "path": "/var/lib/iptables/rules-save",
+        "user": {},
+        "contents": {
+          "source":
+            "data:,*filter%0A%3AINPUT%20DROP%20%5B0%3A0%5D%0A%3AFORWARD%20DROP%20%5B0%3A0%5D%0A%3AOUTPUT%20ACCEPT%20%5B0%3A0%5D%0A-A%20INPUT%20-i%20lo%20-j%20ACCEPT%0A-A%20INPUT%20-i%20eth1%20-j%20ACCEPT%0A-A%20INPUT%20-m%20conntrack%20--ctstate%20RELATED%2CESTABLISHED%20-j%20ACCEPT%0A-A%20INPUT%20-p%20tcp%20-m%20tcp%20--dport%2022%20-j%20ACCEPT%0A-A%20INPUT%20-p%20tcp%20-m%20tcp%20--dport%2080%20-j%20ACCEPT%0A-A%20INPUT%20-p%20tcp%20-m%20tcp%20--dport%20443%20-j%20ACCEPT%0A-A%20INPUT%20-p%20icmp%20-m%20icmp%20--icmp-type%200%20-j%20ACCEPT%0A-A%20INPUT%20-p%20icmp%20-m%20icmp%20--icmp-type%203%20-j%20ACCEPT%0A-A%20INPUT%20-p%20icmp%20-m%20icmp%20--icmp-type%2011%20-j%20ACCEPT%0ACOMMIT%0A",
+          "verification": {}
+        },
+        "mode": 420
+      },
+      {
+        "filesystem": "root",
+        "group": {
+          "name": "users"
+        },
+        "path": "/home/dev/.ssh/git-extern",
+        "user": {
+          "name": "dev"
+        },
+        "contents": {
+          "source":
+            "data:,-----BEGIN%20OPENSSH%20PRIVATE%20KEY-----%0Ab3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW%0AQyNTUxOQAAACCqNkEKATM9s%2Bik79TB%2FKWl%2FjxaJY6doeMH1avEpsBJhwAAAKCghL%2F9oIS%2F%0A%2FQAAAAtzc2gtZWQyNTUxOQAAACCqNkEKATM9s%2Bik79TB%2FKWl%2FjxaJY6doeMH1avEpsBJhw%0AAAAEBxkgAzJe0tLsECpdI%2BblHwpHrcY88SHcKrLUZiYcH54Ko2QQoBMz2z6KTv1MH8paX%2B%0APFoljp2h4wfVq8SmwEmHAAAAF2dpdGh1Yi1leHRlcm4tc3RldmVueGllAQIDBAUG%0A-----END%20OPENSSH%20PRIVATE%20KEY-----%0A",
+          "verification": {}
+        },
+        "mode": 384
+      },
+      {
+        "filesystem": "root",
+        "group": {
+          "name": "users"
+        },
+        "path": "/home/dev/.ssh/config",
+        "user": {
+          "name": "dev"
+        },
+        "contents": {
+          "source":
+            "data:,Host%20github.com%0A%20%20IdentitiesOnly%20yes%0A%0AHost%20*%0A%20%20AddKeysToAgent%20yes%0A%20%20IdentityFile%20~%2F.ssh%2Fgit-extern%0A",
+          "verification": {}
+        },
+        "mode": 384
+      },
+      {
+        "filesystem": "root",
+        "group": {
+          "name": "users"
+        },
+        "path": "/home/dev/.vimrc",
+        "user": {
+          "name": "dev"
+        },
+        "contents": {
+          "source":
+            "data:,%22%22%20CUSTOM%20VIM%20CONFIG%0A%22%20filetype%20plugin%20indent%20on%0A%22%20syntax%20on%0A%0A%22%22%20General%0Aset%20number%20%20%20%20%20%20%20%20%22%20Show%20line%20numbers%0Aset%20wrap%0Aset%20wrapmargin%3D0%0Aset%20linebreak%20%20%20%20%20%22%20Break%20lines%20at%20word%20(requires%20Wrap%20lines)%0Aset%20nolist%0Aset%20showbreak%3D%2B%2B%2B%20%22%20Wrap-broken%20line%20prefix%0Aset%20textwidth%3D0%20%20%20%22%20Line%20wrap%20(number%20of%20cols)%0Aset%20showmatch%20%20%20%20%20%22%20Highlight%20matching%20brace%0Aset%20errorbells%20%20%20%20%22%20Beep%20or%20flash%20screen%20on%20errors%0A%0Aset%20hlsearch%20%20%20%20%20%20%22%20Highlight%20all%20search%20results%0Aset%20smartcase%20%20%20%20%20%22%20Enable%20smart-case%20search%0Aset%20ignorecase%20%20%20%20%22%20Always%20case-insensitive%0Aset%20incsearch%20%20%20%20%20%22%20Searches%20for%20strings%20incrementally%0A%0Aset%20autoindent%20%20%20%20%22%20Auto-indent%20new%20lines%0Aset%20shiftwidth%3D4%20%20%22%20Number%20of%20auto-indent%20spaces%0Aset%20smartindent%20%20%20%22%20Enable%20smart-indent%0Aset%20smarttab%09%09%22%20Enable%20smart-tabs%0Aset%20softtabstop%3D4%09%22%20Number%20of%20spaces%20per%20Tab%0A%0A%22%22%20Advanced%0Aset%20ruler%09%20%20%20%20%20%20%20%20%22%20Show%20row%20and%20column%20ruler%20information%0Aset%20undolevels%3D1000%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%20Number%20of%20undo%20levels%0Aset%20backspace%3Dindent%2Ceol%2Cstart%20%20%20%20%22%20Backspace%20behaviour%0A",
+          "verification": {}
+        },
+        "mode": 420
+      },
+      {
+        "filesystem": "root",
+        "group": {
+          "name": "users"
+        },
+        "path": "/home/dev/.bashrc",
+        "user": {
+          "name": "dev"
+        },
+        "contents": {
+          "source":
+            "data:,%23%20Test%20for%20an%20interactive%20shell.%0Aif%20%5B%5B%20%24-%20!%3D%20*i*%20%5D%5D%20%3B%20then%0A%20%20%20%20%20%20%20%20%23%20Shell%20is%20non-interactive.%20%20Be%20done%20now!%0A%20%20%20%20%20%20%20%20return%0Afi%0A%0A%23%20Prioritize%20%2Fopt%2Fbin%20in%20PATH%0APATH%3D%22%2Fopt%2Fbin%3A%24PATH%22%0A%0A%23%20Import%20custom%20aliases%20and%20functions%0Aif%20%5B%20-f%20~%2F.bash_imports%20%5D%3B%20then%20.%20~%2F.bash_imports%3B%20fi%0A%0A%23%20Enable%20custom%20colors%20and%20styling%0Aexport%20CLICOLOR%3D1%0Aexport%20color_prompt%3Dyes%0A%0A%23%20Customize%20PS1%0APS1%3D'%5C%5B%5Ce%5B1%3B36m%5C%5D%5Cu%40%5Ch%5C%5B%5Ce%5B21m%5C%5D%3A%5C%5B%5Ce%5B0%3B22m%5C%5D%5Cw%5C%5B%5Ce%5B0%3B1m%5C%5D%5C%24%5C%5B%5Ce%5B22m%5C%5D%20'%0A",
+          "verification": {}
+        },
+        "mode": 420
+      },
+      {
+        "filesystem": "root",
+        "group": {
+          "name": "users"
+        },
+        "path": "/home/dev/.bash_imports",
+        "user": {
+          "name": "dev"
+        },
+        "contents": {
+          "source":
+            "data:,%23!%2Fbin%2Fbash%0A%0A%23%20Import%20bash%20functions...%0Aif%20%5B%20-f%20~%2F.bash_functions%20%5D%3B%20then%20.%20~%2F.bash_functions%0Aelse%20echo%20-e%20%22%5Ce%5B0%3B31mWARN%3A%20.bash_functions%20NOT%20FOUND%5C033%5B0m%22%0Afi%0A%0A%23%20Import%20bash%20aliases...%0A%23%20requires%3A%20~%2F.bash_functions%20has%20been%20sourced%0Aif%20%5B%20-f%20%24HOME%2F.bash_aliases%20%5D%3B%20then%20.%20%24HOME%2F.bash_aliases%0Aelse%20warn%20%22WARN%3A%20.bash_aliases%20NOT%20FOUND%22%0Afi%0A",
+          "verification": {}
+        },
+        "mode": 420
+      },
+      {
+        "filesystem": "root",
+        "group": {
+          "name": "users"
+        },
+        "path": "/home/dev/.bash_functions",
+        "user": {
+          "name": "dev"
+        },
+        "contents": {
+          "source":
+            "data:,%23!%2Fbin%2Fbash%0A%0A%23%20warn%20%24STRING%20-%3E%20echo%20%24STRING%20in%20red%0Awarn()%20%7B%0A%20%20%20%20echo%20-en%20%22%5Ce%5B0%3B31m%22%0A%20%20%20%20echo%20%241%0A%20%20%20%20echo%20-en%20%22%5C033%5B0m%22%0A%7D%0A%0A%23%20transfer%20%24FILE%20-%3E%20upload%20%24FILE%20using%20transfer.sh%0Atransfer()%20%7B%0A%20%20%20%20curl%20--upload-file%20%241%20https%3A%2F%2Ftransfer.sh%2F%24%7B1%23%23*%2F%7D%0A%7D%0A%0A%23%20trash%20%24FILES_OR_DIRS%20-%3E%20moves%20%24FILES_OR_DIRS%20to%20~%2F.Trash%0Atrash%20()%20%7B%0A%20%20for%20file%20in%20%24%40%3B%20do%20mv%20%24file%20~%2F.Trash%2F%24file%3B%20done%0A%7D%0A",
+          "verification": {}
+        },
+        "mode": 420
+      },
+      {
+        "filesystem": "root",
+        "group": {
+          "name": "users"
+        },
+        "path": "/home/dev/.bash_aliases",
+        "user": {
+          "name": "dev"
+        },
+        "contents": {
+          "source":
+            "data:,%23!%2Fbin%2Fbash%0A%0A%23%20chstat%20%24FILE_OR_DIR%20-%3E%20show%20%24FILE_OR_DIR%20permissions%20in%0A%23%20%20%20numerical%20form%0Aif%20%5B%5B%20%24(uname%20-s)%20%3D%3D%20%22Darwin%22%20%5D%5D%0Athen%20alias%20chstat%3D%22stat%20-f%20'%25A'%22%0Aelse%20alias%20chstat%3D%22stat%20--format%20'%25a'%22%0Afi%0A%0A%23%23%20Github%3A%0A%23%20git-stat%20-%3E%20git%20status%0Aalias%20git-stat%3D%22git%20status%22%0A%0A%23%20git-co%20-%3E%20git%20checkout%0Aalias%20git-co%3D%22git%20checkout%22%0A%0A%23%20git-br%20-%3E%20get%20name%20of%20current%20Git%20branch%0Aalias%20git-br%3D%22git%20branch%20%7C%20grep%20-e%20%22%5E*%22%20%7C%20cut%20-d'%20'%20-f%202%22%0A%0A%23%20git-rev%20%24FILES_OR_DIRS%20-%3E%20revert%20%24FILES_OR_DIRS%20to%20staged%20version%0Aalias%20git-rev%3D%22git%20checkout%20--%22%0A%0A%23%20git-prune-local%20-%3E%20prunes%20local%20branches%20that%20have%20been%0A%23%20%20%20merged%20into%20remote%0Aalias%20git-prune-local%3D%22git%20branch%20--merged%20%7C%20tail%20-n%20%2B2%20%3E%2Ftmp%2Fmerged-branches%20%26%26%20vi%20%2Ftmp%2Fmerged-branches%20%26%26%20xargs%20git%20branch%20-d%20%3C%2Ftmp%2Fmerged-branches%20%26%26%20rm%20%2Ftmp%2Fmerged-branches%22%0A%0A%23%20git-discard%20-%3E%20discard%20local%20changes%20in%20favor%20of%20remote%20data%0Aalias%20git-discard%3D%22git%20fetch%20--all%20%26%26%20git%20reset%20--hard%20%40%7Bu%7D%22%0A%0A%23%23%20Docker%3A%0A%23%20docker-prunei%20-%3E%20prunes%20docker%20images%0Aalias%20docker-prunei%3D%22docker%20image%20prune%22%0A%0A%23%20docker-prune%20-%3E%20docker%20container%20prune%0Aalias%20docker-prune%3D%22docker%20container%20prune%22%0A%0A%23%23%20List%3A%0A%23%20ll%20-%3E%20show%20owner%20and%20permissions%20for%20a%20file%2Fdir%0Aif%20%5B%5B%20%24(type%20-t%20ll)%20%3D%3D%20%22%22%20%5D%5D%3B%20then%20alias%20ll%3D%22ls%20-l%22%3B%20fi%0A%0A%23%20la%20-%3E%20list%20all%20files%20(including%20hidden)%0Aif%20%5B%5B%20%24(type%20-t%20la)%20%3D%3D%20%22%22%20%5D%5D%3B%20then%20alias%20la%3D%22ls%20-a%22%3B%20fi%0A",
+          "verification": {}
+        },
+        "mode": 420
+      },
+      {
+        "filesystem": "root",
+        "group": {},
+        "path": "/etc/coreos/update.conf",
+        "user": {},
+        "contents": {
+          "source":
+            "data:,GROUP%3Dbeta%0ASERVER%3Dhttps%3A%2F%2Fpublic.update.core-os.net%2Fv1%2Fupdate%2F",
+          "verification": {}
+        },
+        "mode": 420
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents":
+          "[Unit]\nDescription=Docker Compose installer\nAfter=system-networkd.service\nRequires=system-networkd.service\nConditionPathExists=!/opt/bin/docker-compose\n\n[Service]\nType=oneshot\nExecStartPre=-/bin/mkdir /opt /opt/bin\nExecStart=/bin/curl -o /opt/bin/docker-compose \\\n                    -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64\nExecStartPost=/bin/chmod +x /opt/bin/docker-compose\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "docker-compose-installer.service"
+      },
+      {
+        "enabled": true,
+        "name": "iptables-restore.service"
+      }
+    ]
+  }
+}

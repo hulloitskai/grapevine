@@ -1,0 +1,22 @@
+{
+  "name": "grapevine-config",
+  "version": "0.1.0",
+  "description": "The Container Linux / Ignition configuration for Grapevine",
+  "homepage": "https://github.com/steven-xie/grapevine",
+  "repository": "git@github.com:steven-xie/grapevine",
+  "bugs": {
+    "url": "https://github.com/steven-xie/grapevine/issues",
+    "email": "dev@stevenxie.me"
+  },
+  "author": "Steven Xie <hello@stevenxie.me>",
+  "private": true,
+  "scripts": {
+    "make": "yarn mk-config && yarn prettier",
+    "mk-config":
+      "./tools/ct -pretty -strict -platform digitalocean -in-file src/container-linux-config.yml -out-file out/ignition-config.json",
+    "prettier": "prettier --write **/*.json"
+  },
+  "devDependencies": {
+    "prettier": "^1.12.1"
+  }
+}

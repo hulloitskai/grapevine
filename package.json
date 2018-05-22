@@ -1,0 +1,13 @@
+{
+  "name": "grapevine",
+  "version": "0.0.0",
+  "description": "A set of personal services that power `stevenxie.me`.",
+  "homepage": "https://github.com/steven-xie/grapevine",
+  "repository": "git@github.com:steven-xie/grapevine",
+  "bugs": {
+    "url": "https://github.com/steven-xie/grapevine/issues",
+    "email": "dev@stevenxie.me"
+  },
+  "author": "Steven Xie <hello@stevenxie.me>",
+  "private": true
+}
