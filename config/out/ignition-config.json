@@ -75,7 +75,7 @@
         },
         "contents": {
           "source":
-            "data:,Host%20github.com%0A%20%20IdentitiesOnly%20yes%0A%0AHost%20*%0A%20%20AddKeysToAgent%20yes%0A%20%20IdentityFile%20~%2F.ssh%2Fgit-extern%0A",
+            "data:,Host%20github.com%0A%20%20%20%20IdentitiesOnly%20yes%0A%0AHost%20*%0A%20%20%20%20AddKeysToAgent%20yes%0A%20%20%20%20IdentityFile%20~%2F.ssh%2Fgit-extern%0A",
           "verification": {}
         },
         "mode": 384
@@ -155,7 +155,7 @@
         },
         "contents": {
           "source":
-            "data:,%23!%2Fbin%2Fbash%0A%0A%23%20chstat%20%24FILE_OR_DIR%20-%3E%20show%20%24FILE_OR_DIR%20permissions%20in%0A%23%20%20%20numerical%20form%0Aif%20%5B%5B%20%24(uname%20-s)%20%3D%3D%20%22Darwin%22%20%5D%5D%0Athen%20alias%20chstat%3D%22stat%20-f%20'%25A'%22%0Aelse%20alias%20chstat%3D%22stat%20--format%20'%25a'%22%0Afi%0A%0A%23%23%20Github%3A%0A%23%20git-stat%20-%3E%20git%20status%0Aalias%20git-stat%3D%22git%20status%22%0A%0A%23%20git-co%20-%3E%20git%20checkout%0Aalias%20git-co%3D%22git%20checkout%22%0A%0A%23%20git-br%20-%3E%20get%20name%20of%20current%20Git%20branch%0Aalias%20git-br%3D%22git%20branch%20%7C%20grep%20-e%20%22%5E*%22%20%7C%20cut%20-d'%20'%20-f%202%22%0A%0A%23%20git-rev%20%24FILES_OR_DIRS%20-%3E%20revert%20%24FILES_OR_DIRS%20to%20staged%20version%0Aalias%20git-rev%3D%22git%20checkout%20--%22%0A%0A%23%20git-prune-local%20-%3E%20prunes%20local%20branches%20that%20have%20been%0A%23%20%20%20merged%20into%20remote%0Aalias%20git-prune-local%3D%22git%20branch%20--merged%20%7C%20tail%20-n%20%2B2%20%3E%2Ftmp%2Fmerged-branches%20%26%26%20vi%20%2Ftmp%2Fmerged-branches%20%26%26%20xargs%20git%20branch%20-d%20%3C%2Ftmp%2Fmerged-branches%20%26%26%20rm%20%2Ftmp%2Fmerged-branches%22%0A%0A%23%20git-discard%20-%3E%20discard%20local%20changes%20in%20favor%20of%20remote%20data%0Aalias%20git-discard%3D%22git%20fetch%20--all%20%26%26%20git%20reset%20--hard%20%40%7Bu%7D%22%0A%0A%23%23%20Docker%3A%0A%23%20docker-prunei%20-%3E%20prunes%20docker%20images%0Aalias%20docker-prunei%3D%22docker%20image%20prune%22%0A%0A%23%20docker-prune%20-%3E%20docker%20container%20prune%0Aalias%20docker-prune%3D%22docker%20container%20prune%22%0A%0A%23%23%20List%3A%0A%23%20ll%20-%3E%20show%20owner%20and%20permissions%20for%20a%20file%2Fdir%0Aif%20%5B%5B%20%24(type%20-t%20ll)%20%3D%3D%20%22%22%20%5D%5D%3B%20then%20alias%20ll%3D%22ls%20-l%22%3B%20fi%0A%0A%23%20la%20-%3E%20list%20all%20files%20(including%20hidden)%0Aif%20%5B%5B%20%24(type%20-t%20la)%20%3D%3D%20%22%22%20%5D%5D%3B%20then%20alias%20la%3D%22ls%20-a%22%3B%20fi%0A",
+            "data:,%23!%2Fbin%2Fbash%0A%0A%23%20chstat%20%24FILE_OR_DIR%20-%3E%20show%20%24FILE_OR_DIR%20permissions%20in%0A%23%20%20%20numerical%20form%0Aif%20%5B%5B%20%24(uname%20-s)%20%3D%3D%20%22Darwin%22%20%5D%5D%0Athen%20alias%20chstat%3D%22stat%20-f%20'%25A'%22%0Aelse%20alias%20chstat%3D%22stat%20--format%20'%25a'%22%0Afi%0A%0A%23%23%20Git%3A%0A%23%20git-stat%20-%3E%20git%20status%0Aalias%20git-stat%3D%22git%20status%22%0A%0A%23%20git-co%20-%3E%20git%20checkout%0Aalias%20git-co%3D%22git%20checkout%22%0A%0A%23%20git-br%20-%3E%20get%20name%20of%20current%20Git%20branch%0Aalias%20git-br%3D%22git%20branch%20%7C%20grep%20-e%20%22%5E*%22%20%7C%20cut%20-d'%20'%20-f%202%22%0A%0A%23%20git-rev%20%24FILES_OR_DIRS%20-%3E%20revert%20%24FILES_OR_DIRS%20to%20staged%20version%0Aalias%20git-rev%3D%22git%20checkout%20--%22%0A%0A%23%20git-prune-local%20-%3E%20prunes%20local%20branches%20that%20have%20been%0A%23%20%20%20merged%20into%20remote%0Aalias%20git-prune-local%3D%22git%20branch%20--merged%20%7C%20tail%20-n%20%2B2%20%3E%2Ftmp%2Fmerged-branches%20%26%26%20vi%20%2Ftmp%2Fmerged-branches%20%26%26%20xargs%20git%20branch%20-d%20%3C%2Ftmp%2Fmerged-branches%20%26%26%20rm%20%2Ftmp%2Fmerged-branches%22%0A%0A%23%20git-discard%20-%3E%20discard%20local%20changes%20in%20favor%20of%20remote%20data%0Aalias%20git-discard%3D%22git%20fetch%20--all%20%26%26%20git%20reset%20--hard%20%40%7Bu%7D%22%0A%0A%23%23%20Docker%3A%0A%23%20docker-prunei%20-%3E%20prunes%20docker%20images%0Aalias%20docker-prunei%3D%22docker%20image%20prune%22%0A%0A%23%20docker-prune%20-%3E%20docker%20container%20prune%0Aalias%20docker-prune%3D%22docker%20container%20prune%22%0A%0A%23%23%20List%3A%0A%23%20ll%20-%3E%20show%20owner%20and%20permissions%20for%20a%20file%2Fdir%0Aif%20%5B%5B%20%24(type%20-t%20ll)%20%3D%3D%20%22%22%20%5D%5D%3B%20then%20alias%20ll%3D%22ls%20-l%22%3B%20fi%0A%0A%23%20la%20-%3E%20list%20all%20files%20(including%20hidden)%0Aif%20%5B%5B%20%24(type%20-t%20la)%20%3D%3D%20%22%22%20%5D%5D%3B%20then%20alias%20la%3D%22ls%20-a%22%3B%20fi%0A",
           "verification": {}
         },
         "mode": 420
@@ -177,14 +177,32 @@
   "systemd": {
     "units": [
       {
+        "enabled": true,
+        "name": "iptables-restore.service"
+      },
+      {
         "contents":
-          "[Unit]\nDescription=Docker Compose installer\nAfter=system-networkd.service\nRequires=system-networkd.service\nConditionPathExists=!/opt/bin/docker-compose\n\n[Service]\nType=oneshot\nExecStartPre=-/bin/mkdir /opt /opt/bin\nExecStart=/bin/curl -o /opt/bin/docker-compose \\\n                    -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64\nExecStartPost=/bin/chmod +x /opt/bin/docker-compose\n\n[Install]\nWantedBy=multi-user.target\n",
+          "[Unit]\nDescription=Docker Compose installer\nRequires=system-networkd.service\nAfter=system-networkd.service\nConditionPathExists=!/opt/bin/docker-compose\n\n[Service]\nType=oneshot\nExecStartPre=-/bin/mkdir /opt /opt/bin\nExecStart=/bin/curl -o /opt/bin/docker-compose \\\n                    -L https://github.com/docker/compose/releases\\\n                       /download/1.21.2/docker-compose-Linux-x86_64\nExecStartPost=/bin/chmod +x /opt/bin/docker-compose\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "docker-compose-installer.service"
       },
       {
+        "contents":
+          "[Unit]\nDescription=Grapevine repository cloner\nRequires=system-networkd.service\nAfter=system-networkd.service\nConditionPathExists=!/home/dev/grapevine/.git/\n\n[Service]\nType=oneshot\nUser=dev\nWorkingDirectory=~\nExecStart=/usr/bin/git clone --single-branch \\\n                             --branch master \\\n                             --depth 1 \\\n                             git@github.com:steven-xie/grapevine.git\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
-        "name": "iptables-restore.service"
+        "name": "grapevine-cloner.service"
+      },
+      {
+        "contents":
+          "[Unit]\nDescription=Docker volume linker\nConditionPathExists=!/home/dev/docker-volumes/\n\n[Service]\nType=oneshot\nUser=dev\nExecStart=/bin/ln -s /var/lib/docker/volumes ~/docker-volumes\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "docker-volume-linker.service"
+      },
+      {
+        "contents":
+          "[Unit]\nDescription=Yarn installer\nRequires=system-networkd.service\nAfter=system-networkd.service\nConditionPathExists=!/home/dev/.yarn/bin/yarn\n\n[Service]\nType=oneshot\nUser=dev\nExecStart=/bin/curl -o- -L https://yarnpkg.com/install.sh | bash\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "yarn-installer.service"
       }
     ]
   }

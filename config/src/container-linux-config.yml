@@ -1,6 +1,7 @@
 # container-linux-config
 
 ignition:
+  # Prevent infinite HTTP(s) resource loading
   timeouts:
     http_response_headers: 10
     http_total: 30
@@ -18,7 +19,7 @@ passwd:
 
 storage:
   files:
-      # Configure SSHD, prevent password authentication
+      # Configure `sshd`, prevent password authentication
     - path: /etc/ssh/sshd_config
       filesystem: root
       mode: 0600
@@ -74,7 +75,6 @@ storage:
           AAAEBxkgAzJe0tLsECpdI+blHwpHrcY88SHcKrLUZiYcH54Ko2QQoBMz2z6KTv1MH8paX+
           PFoljp2h4wfVq8SmwEmHAAAAF2dpdGh1Yi1leHRlcm4tc3RldmVueGllAQIDBAUG
           -----END OPENSSH PRIVATE KEY-----
-
     - path: /home/dev/.ssh/config
       filesystem: root
       user:
@@ -85,11 +85,11 @@ storage:
       contents:
         inline: |
           Host github.com
-            IdentitiesOnly yes
+              IdentitiesOnly yes
 
           Host *
-            AddKeysToAgent yes
-            IdentityFile ~/.ssh/git-extern
+              AddKeysToAgent yes
+              IdentityFile ~/.ssh/git-extern
 
       # Configure custom .vimrc
     - path: /home/dev/.vimrc
@@ -226,7 +226,7 @@ storage:
           else alias chstat="stat --format '%a'"
           fi
 
-          ## Github:
+          ## Git:
           # git-stat -> git status
           alias git-stat="git status"
 
@@ -263,29 +263,86 @@ storage:
 
 systemd:
   units:
+      # Enable autoloading of iptables
+    - name: iptables-restore.service
+      enabled: true
+
       # Install docker-compose
     - name: docker-compose-installer.service
       enabled: true
       contents: |
         [Unit]
         Description=Docker Compose installer
-        After=system-networkd.service
         Requires=system-networkd.service
+        After=system-networkd.service
         ConditionPathExists=!/opt/bin/docker-compose
 
         [Service]
         Type=oneshot
         ExecStartPre=-/bin/mkdir /opt /opt/bin
         ExecStart=/bin/curl -o /opt/bin/docker-compose \
-                            -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64
+                            -L https://github.com/docker/compose/releases\
+                               /download/1.21.2/docker-compose-Linux-x86_64
         ExecStartPost=/bin/chmod +x /opt/bin/docker-compose
 
         [Install]
         WantedBy=multi-user.target
 
-      # Enable autoloading of iptables
-    - name: iptables-restore.service
+      # Clone this repository to `/home/dev/grapevine`
+    - name: grapevine-cloner.service
       enabled: true
+      contents: |
+        [Unit]
+        Description=Grapevine repository cloner
+        Requires=system-networkd.service
+        After=system-networkd.service
+        ConditionPathExists=!/home/dev/grapevine/.git/
+
+        [Service]
+        Type=oneshot
+        User=dev
+        WorkingDirectory=~
+        ExecStart=/usr/bin/git clone --single-branch \
+                                     --branch master \
+                                     --depth 1 \
+                                     git@github.com:steven-xie/grapevine.git
+
+        [Install]
+        WantedBy=multi-user.target
+
+      # Links `/var/lib/docker/volumes/` to `~/docker-volumes/`
+    - name: docker-volume-linker.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Docker volume linker
+        ConditionPathExists=!/home/dev/docker-volumes/
+
+        [Service]
+        Type=oneshot
+        User=dev
+        ExecStart=/bin/ln -s /var/lib/docker/volumes ~/docker-volumes
+
+        [Install]
+        WantedBy=multi-user.target
+
+      # Install Yarn
+    - name: yarn-installer.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Yarn installer
+        Requires=system-networkd.service
+        After=system-networkd.service
+        ConditionPathExists=!/home/dev/.yarn/bin/yarn
+
+        [Service]
+        Type=oneshot
+        User=dev
+        ExecStart=/bin/curl -o- -L https://yarnpkg.com/install.sh | bash
+
+        [Install]
+        WantedBy=multi-user.target
 
 
 update:

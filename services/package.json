@@ -1,0 +1,16 @@
+{
+  "name": "grapevine-services",
+  "version": "0.1.0",
+  "description": "Services designed to be launched on Grapevine servers",
+  "homepage": "https://github.com/steven-xie/grapevine",
+  "repository": "git@github.com:steven-xie/grapevine",
+  "bugs": {
+    "url": "https://github.com/steven-xie/grapevine/issues",
+    "email": "dev@stevenxie.me"
+  },
+  "author": "Steven Xie <hello@stevenxie.me>",
+  "private": true,
+  "scripts": {
+    "express": "docker-compose -f express/docker-compose.yml"
+  }
+}

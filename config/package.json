@@ -1,6 +1,6 @@
 {
   "name": "grapevine-config",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The Container Linux / Ignition configuration for Grapevine",
   "homepage": "https://github.com/steven-xie/grapevine",
   "repository": "git@github.com:steven-xie/grapevine",
