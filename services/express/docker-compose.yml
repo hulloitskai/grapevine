@@ -4,10 +4,10 @@ version: "3"
 
 services:
   express:
-    image: stevenxie/express-starter:v1.0.1-prod
+    image: stevenxie/express-starter:latest
     container_name: express-starter
     ports:
-     - "3000:3000"
+     - "80:3000"
     volumes:
      - express-vol:/app/dist
     restart: on-failure

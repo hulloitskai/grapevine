@@ -11,6 +11,11 @@
   "author": "Steven Xie <hello@stevenxie.me>",
   "private": true,
   "scripts": {
-    "express": "docker-compose -f express/docker-compose.yml"
+    "express": "docker-compose -f express/docker-compose.yml",
+    "express-foreground": "yarn express up",
+    "express-up": "yarn express up -d",
+    "express-down": "yarn express down",
+    "express-down-vol": "yarn express-down --volumes",
+    "express-purge": "yarn express-down-vol --rmi all"
   }
 }

@@ -17,7 +17,8 @@
           "$6$rounds=8192$3vsN5GTvt$RdwYqtTfr/PQJ1DL.yQSYM1RJ/oOi6lRcRDLmpT3JQczhn9E0qoC7KvK9mjb5fZsNEBvQhHL2DIL9dOswgEv8/",
         "primaryGroup": "users",
         "sshAuthorizedKeys": [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL6DIQ+E+sAaDni3VJlnxDJp6LF0s1r6SmbU6P1YMHtQ stevenxie"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL6DIQ+E+sAaDni3VJlnxDJp6LF0s1r6SmbU6P1YMHtQ stevenxie",
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFJKoncFET/9rcYgl3YWYfvWOLTKnrqrirOjsnGkX9zu terraform"
         ]
       }
     ]

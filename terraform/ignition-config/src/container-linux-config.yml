@@ -15,6 +15,7 @@ passwd:
       groups: [ sudo, docker, systemd-journal ]
       ssh_authorized_keys:
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL6DIQ+E+sAaDni3VJlnxDJp6LF0s1r6SmbU6P1YMHtQ stevenxie
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFJKoncFET/9rcYgl3YWYfvWOLTKnrqrirOjsnGkX9zu terraform
 
 
 storage:

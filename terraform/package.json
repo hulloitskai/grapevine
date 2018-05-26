@@ -1,7 +1,7 @@
 {
-  "name": "grapevine",
-  "version": "0.1.0",
-  "description": "A set of personal services that power `stevenxie.me`.",
+  "name": "grapevine-terraform",
+  "version": "0.0.1",
+  "description": "The Terraform infrastructure configuraiton for Grapevine",
   "homepage": "https://github.com/steven-xie/grapevine",
   "repository": "git@github.com:steven-xie/grapevine",
   "bugs": {
@@ -11,9 +11,9 @@
   "author": "Steven Xie <hello@stevenxie.me>",
   "private": true,
   "scripts": {
-    "tf-plan": "cd terraform && yarn plan",
-    "tf-apply": "cd terraform && yarn apply",
-    "tf-execute": "cd terraform && yarn execute",
-    "tf-destroy": "cd terraform && yarn destroy"
+    "plan": "terraform plan -out=grapevine.tfplan",
+    "apply": "terraform apply",
+    "execute": "terraform apply \"grapevine.tfplan\"",
+    "destroy": "terraform destroy"
   }
 }
