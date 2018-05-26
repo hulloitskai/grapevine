@@ -37,7 +37,7 @@ storage:
           fi
 
           # Prioritize /opt/bin, add Node to PATH
-          export NODEJS_HOME=/opt/lib/nodejs/node-v10.2.1/bin
+          export NODEJS_HOME=/opt/lib/nodejs/node/bin
           export PATH="$NODEJS_HOME:/opt/bin:$PATH"
 
           # Import custom aliases and functions
@@ -319,6 +319,7 @@ systemd:
 
         [Install]
         WantedBy=multi-user.target
+        WantedBy=grapevine-provisioner.service
 
       # Clone this repository to `/home/dev/grapevine`
     - name: grapevine-cloner.service
@@ -341,6 +342,7 @@ systemd:
 
         [Install]
         WantedBy=multi-user.target
+        WantedBy=grapevine-provisioner.service
 
       # Install Node
     - name: node-installer.service
@@ -357,7 +359,7 @@ systemd:
         ExecStartPre=/bin/curl -o /tmp/node-pkg.tar.xz https://nodejs.org/dist/v10.2.1/node-v10.2.1-linux-x64.tar.xz
         ExecStartPre=/bin/mkdir -p /opt /opt/lib /opt/lib/nodejs
         ExecStart=/bin/tar -xJvf /tmp/node-pkg.tar.xz -C /opt/lib/nodejs
-        ExecStartPost=/bin/mv /opt/lib/nodejs/node-v10.2.1-linux-x64 /opt/lib/nodejs/node-v10.2.1
+        ExecStartPost=/bin/mv /opt/lib/nodejs/node-v10.2.1-linux-x64 /opt/lib/nodejs/node
         ExecStartPost=/bin/rm /tmp/node-pkg.tar.xz
 
         [Install]
@@ -380,6 +382,29 @@ systemd:
         ExecStartPre=+/bin/chmod +x /tmp/yarn-install.sh
         ExecStart=-/bin/sh /tmp/yarn-install.sh
         ExecStartPost=/bin/rm /tmp/yarn-install.sh
+
+        [Install]
+        WantedBy=multi-user.target
+        WantedBy=grapevine-provisioner.service
+
+    # Automatically starts designated Grapevine services
+    - name: grapevine-provisioner.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Grapevine services provisioner
+        After=yarn-installer.service
+        After=node-installer.service
+        After=docker-compose-installer.service
+        After=grapevine-cloner.service
+
+        [Service]
+        Type=oneshot
+        User=dev
+        WorkingDirectory=/home/dev/grapevine/services
+        Environment="PATH=/opt/lib/nodejs/node/bin:/opt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin"
+        ExecStartPre=/home/dev/.yarn/bin/yarn
+        ExecStart=/home/dev/.yarn/bin/yarn start
 
         [Install]
         WantedBy=multi-user.target

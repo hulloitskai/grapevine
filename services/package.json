@@ -11,6 +11,7 @@
   "author": "Steven Xie <hello@stevenxie.me>",
   "private": true,
   "scripts": {
+    "start": "yarn express-up",
     "express": "docker-compose -f express/docker-compose.yml",
     "express-foreground": "yarn express up",
     "express-up": "yarn express up -d",

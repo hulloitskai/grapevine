@@ -1,6 +1,6 @@
 {
   "name": "grapevine-terraform",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The Terraform infrastructure configuraiton for Grapevine",
   "homepage": "https://github.com/steven-xie/grapevine",
   "repository": "git@github.com:steven-xie/grapevine",
@@ -11,9 +11,9 @@
   "author": "Steven Xie <hello@stevenxie.me>",
   "private": true,
   "scripts": {
-    "plan": "terraform plan -out=grapevine.tfplan",
+    "plan": "terraform plan -out=grapevine-tfplan",
     "apply": "terraform apply",
-    "execute": "terraform apply \"grapevine.tfplan\"",
+    "execute": "terraform apply \"grapevine-tfplan\"",
     "destroy": "terraform destroy"
   }
 }

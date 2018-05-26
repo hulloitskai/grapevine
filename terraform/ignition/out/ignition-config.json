@@ -205,13 +205,13 @@
       },
       {
         "contents":
-          "[Unit]\nDescription=Docker Compose installer\nAfter=systemd-networkd.service\nRequires=systemd-networkd.service\nConditionPathExists=!/opt/bin/docker-compose\n\n[Service]\nType=oneshot\nExecStartPre=/bin/mkdir -p /opt /opt/bin\nExecStart=/bin/curl -o /opt/bin/docker-compose \\\n                    -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64\nExecStartPost=/bin/chmod +x /opt/bin/docker-compose\n\n[Install]\nWantedBy=multi-user.target\n",
+          "[Unit]\nDescription=Docker Compose installer\nAfter=systemd-networkd.service\nRequires=systemd-networkd.service\nConditionPathExists=!/opt/bin/docker-compose\n\n[Service]\nType=oneshot\nExecStartPre=/bin/mkdir -p /opt /opt/bin\nExecStart=/bin/curl -o /opt/bin/docker-compose \\\n                    -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64\nExecStartPost=/bin/chmod +x /opt/bin/docker-compose\n\n[Install]\nWantedBy=multi-user.target\nWantedBy=grapevine-provisioner.service\n",
         "enabled": true,
         "name": "docker-compose-installer.service"
       },
       {
         "contents":
-          "[Unit]\nDescription=Grapevine repository cloner\nAfter=systemd-networkd.service\nRequires=systemd-networkd.service\nConditionPathExists=!/home/dev/grapevine/.git/\n\n[Service]\nType=oneshot\nUser=dev\nWorkingDirectory=~\nExecStart=/usr/bin/git clone --single-branch \\\n                             --branch master \\\n                             --depth 1 \\\n                             git@github.com:steven-xie/grapevine.git\n\n[Install]\nWantedBy=multi-user.target\n",
+          "[Unit]\nDescription=Grapevine repository cloner\nAfter=systemd-networkd.service\nRequires=systemd-networkd.service\nConditionPathExists=!/home/dev/grapevine/.git/\n\n[Service]\nType=oneshot\nUser=dev\nWorkingDirectory=~\nExecStart=/usr/bin/git clone --single-branch \\\n                             --branch master \\\n                             --depth 1 \\\n                             git@github.com:steven-xie/grapevine.git\n\n[Install]\nWantedBy=multi-user.target\nWantedBy=grapevine-provisioner.service\n",
         "enabled": true,
         "name": "grapevine-cloner.service"
       },
@@ -223,9 +223,15 @@
       },
       {
         "contents":
-          "[Unit]\nDescription=Yarn installer\nAfter=node-installer.service\nRequires=node-installer.service\nConditionPathExists=!/home/dev/.yarn/bin/yarn\n\n[Service]\nType=oneshot\nUser=dev\nExecStartPre=/bin/curl -o /tmp/yarn-install.sh -L https://yarnpkg.com/install.sh\nExecStartPre=+/bin/chmod +x /tmp/yarn-install.sh\nExecStart=-/bin/sh /tmp/yarn-install.sh\nExecStartPost=/bin/rm /tmp/yarn-install.sh\n\n[Install]\nWantedBy=multi-user.target\n",
+          "[Unit]\nDescription=Yarn installer\nAfter=node-installer.service\nRequires=node-installer.service\nConditionPathExists=!/home/dev/.yarn/bin/yarn\n\n[Service]\nType=oneshot\nUser=dev\nExecStartPre=/bin/curl -o /tmp/yarn-install.sh -L https://yarnpkg.com/install.sh\nExecStartPre=+/bin/chmod +x /tmp/yarn-install.sh\nExecStart=-/bin/sh /tmp/yarn-install.sh\nExecStartPost=/bin/rm /tmp/yarn-install.sh\n\n[Install]\nWantedBy=multi-user.target\nWantedBy=grapevine-provisioner.service\n",
         "enabled": true,
         "name": "yarn-installer.service"
+      },
+      {
+        "contents":
+          "[Unit]\nDescription=Grapevine services provisioner\nAfter=yarn-installer.service\nAfter=node-installer.service\nAfter=docker-compose-installer.service\nAfter=grapevine-cloner.service\n\n[Service]\nType=oneshot\nUser=dev\nWorkingDirectory=/home/dev/grapevine/services\nEnvironment=\"PATH=/opt/lib/nodejs/node-v10.2.1/bin:/opt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin\"\nExecStart=/home/dev/.yarn/bin/yarn express-up\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "grapevine-provisioner.service"
       }
     ]
   }
