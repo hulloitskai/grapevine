@@ -1,11 +1,23 @@
 # Grapevine
 
-_A personal server that powers https://stevenxie.me and associated services._
+_Automated infrastructure for https://stevenxie.me and associated services._
 
 It is configured using [Terraform](https://www.terraform.io), and uses
 [CoreOS](https://coreos.com) as a platform OS. All services running on Grapevine
 are meant to be run through [Docker](https://docker.com), and deployed remotely
 using [Docker Machine](https://docs.docker.com/machine/).
+
+## Prerequisites
+
+The local development machine should have the following tools.
+
+- [Docker](https://www.docker.com) and
+  [Docker Machine](https://docs.docker.com/machine/install-machine/) (Docker
+  Machine comes preinstalled with _Docker for Mac_ and _Docker for Windows_)
+- [Terraform](https://www.terraform.io)
+- [`hash512`](https://github.com/steven-xie/hash512) (or some other SHA-512
+  password-hashing utility like `mkpasswd`)
+- `ssh-keygen` (for making SSH keys; alternatively you can use existing keys)
 
 ## Configuration
 
