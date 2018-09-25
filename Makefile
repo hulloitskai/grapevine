@@ -1,3 +1,8 @@
+## Configurable variables:
+NAME   = "grapevine"
+DOMAIN = "stevenxie.me"
+SSHKEY = "./auth/id_ed25519.terraform"
+
 ## Terraform commands:
 .PHONY: init apply plan plan-destroy exec destroy fmt
 
@@ -24,18 +29,14 @@ fmt:
 DKMCH = docker-machine
 
 ## mch-create creates a generic docker machine on the remote host.
-## Variables: IPADDR, SSHKEY
-SSHKEY = "./auth/id_ed25519.terraform"
-IPADDR = "grapevine.stevenxie.me"
+## Variables: ADDR, SSHKEY
+ADDR = "$(NAME).$(DOMAIN)"
 mch-create:
 	@$(DKMCH) create --driver generic \
-					 --generic-ip-address="$(IPADDR)" \
+					 --generic-ip-address="$(ADDR)" \
 					 --generic-ssh-key="$(SSHKEY)" \
 					 --generic-ssh-user=admin \
-					 grapevine
+					 $(NAME)
 
 mch-rm:
-	@$(DKMCH) rm grapevine
-
-mch-env:
-	@tmp=$$(mktemp) && $(DKMCH) env grapevine > $$tmp && . $$tmp && rm $$tmp
+	@$(DKMCH) rm $(NAME)

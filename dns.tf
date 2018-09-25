@@ -5,9 +5,7 @@ variable "cf_email" {}
 variable "cf_token" {}
 
 // Target Cloudflare domain
-variable "cf_domain" {
-  default = "stevenxie.me"
-}
+variable "cf_domain" {}
 
 // Cloudflare DNS configurations
 variable "cf_proxied_names" {
