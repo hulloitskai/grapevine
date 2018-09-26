@@ -1,6 +1,14 @@
 ## Configurable variables:
 SSHKEY = ./auth/id_ed25519.terraform
 
+## Setup commands:
+.PHONY: setup
+
+## setup will configure Git to use the hooks in .githooks/.
+setup:
+	@git config core.hooksPath .githooks
+
+
 ## Terraform commands:
 .PHONY: init apply plan plan-destroy exec destroy fmt
 

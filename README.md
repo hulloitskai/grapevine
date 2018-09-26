@@ -15,43 +15,26 @@ The local development machine should have the following tools.
   [Docker Machine](https://docs.docker.com/machine/install-machine/) (Docker
   Machine comes preinstalled with _Docker for Mac_ and _Docker for Windows_)
 - [Terraform](https://www.terraform.io)
-- [`hash512`](https://github.com/steven-xie/hash512) (or some other SHA-512
-  password-hashing utility like `mkpasswd`)
-- `ssh-keygen` (for making SSH keys; alternatively you can use existing keys)
+- [`git-secret`](http://git-secret.io): a tool for encrypting and decrypting
+  secrets in Git.
 
-## Configuration
+In order to gain access to the secrets, the project owner must add your public
+GPG key to `git-secret`; afterwards, run `git-secret reveal` to place the
+secret files in their proper locations. Make sure you also run `make setup` to
+configure your Git hooks to automatically check for updated secrets.
 
-1. Create an `auth/`directory with the following pieces of data:
+## Generating Infrastructure
 
-   - `admin.passhash`: a SHA-512 password hash generated using
-     [`hash512`](https://github.com/steven-xie/hash512). The corresponding
-     password will be the password for the primary user, `admin`.
-   - `id_ed25519.pub`: a public key for personal access to the server. Should
-     be generated along with a corresponding private key using:
-     `ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "comment"`.
-     See [this article](https://medium.com/risan/upgrade-your-ssh-key-to-ed25519-c6e8d60d3c54)
-     for a better explanation of the behind-the-scenes of this command.
-   - `id_ed25519.terraform`, `id_ed25519.terraform.pub`: the public-private
-     key pair that Terraform will use to access the server to perform remote
-     provisioning. Generated the same way as `id_ed25519.pub`.
+> **Note**: Make sure that no infrastructure associated with `grapevine` is
+> currently active, before generating infrastructure; otherwise, existing
+> systems may be overwritten.
 
-2. Create a `terraform.tfvars` of the following shape:
+Run `make apply` to automatically generate the infrastructure on DigitalOcean
+and Cloudflare.
 
-   ```hcl
-   // Cloudflare
-   cf_email = "..."
-   cf_token = "..."
+## Deploying Applications
 
-   // DigitalOcean
-   do_token = "..."
-   ```
-
-3. Run `make apply` to automatically generate the infrastructure on DigitalOcean
-   and Cloudflare.
-
-## Deploying Docker Containers
-
-### Configuration
+### Connecting with Docker Machine
 
 1. Run `make mch-create` to create a Docker Machine corresponding to
    `grapevine`. You only have to do this step once.
@@ -61,7 +44,7 @@ The local development machine should have the following tools.
 3. When you are done with deploying to the remote Docker daemon, switch back
    to the local daemon by running `. unmachine.env.sh`.
 
-### Deploying
+### Example Deploy
 
 After sourcing the Docker Machine env variables, deploy a container /
 composition of containers / stack / swarm the same way you would on a local

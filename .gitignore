@@ -17,7 +17,8 @@ override.tf.json
 *_override.tf.json
 
 ## Secrets and authentication files
-/auth/
+/auth/*
+!/auth/*.secret
 terraform.tfvars
 
 ## Terraform plans
@@ -40,3 +41,6 @@ Thumbs.db
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+## git-secret:
+.gitsecret/keys/random_seed
