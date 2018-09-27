@@ -1,11 +1,11 @@
-# Grapevine
+# grapevine
 
 _Automated infrastructure for https://stevenxie.me and associated services._
 
 It is configured using [Terraform](https://www.terraform.io), and uses
-[CoreOS](https://coreos.com) as a platform OS. All services running on Grapevine
-are meant to be run through [Docker](https://docker.com), and deployed remotely
-using [Docker Machine](https://docs.docker.com/machine/).
+[CoreOS](https://coreos.com) as a platform OS. All services running on
+`grapevine` are meant to be run through [Docker](https://docker.com), and
+deployed remotely using [Docker Machine](https://docs.docker.com/machine/).
 
 ## Prerequisites
 
