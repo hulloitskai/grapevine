@@ -1,9 +1,18 @@
+<p align="center">
+  <img src="./assets/icon.png" width="175px" title="Icon made by Freepik from www.flaticon.com" />
+</p>
+<p align="center">
+  <a href="https://uptimerobot.com/dashboard.php">
+    <img src="https://img.shields.io/uptimerobot/status/m781035502-a5dbe079527d0725ef6a18d9.svg" />
+  </a>
+  <a href="https://uptimerobot.com/dashboard.php">
+    <img src="https://img.shields.io/uptimerobot/ratio/m781035502-a5dbe079527d0725ef6a18d9.svg" />
+  </a>
+</p>
+
 # grapevine
 
 _Automated infrastructure for https://stevenxie.me and associated services._
-
-[![Uptime Robot: status][uptime-robot-status-img]][uptime-robot]
-[![Uptime Robot: ratio][uptime-robot-ratio-img]][uptime-robot]
 
 It is configured using [Terraform](https://www.terraform.io), and uses
 [CoreOS](https://coreos.com) as a platform OS. All services running on
@@ -61,7 +70,3 @@ docker run -d --name hello-world -p 80:8000 crccheck/hello-world
 ```
 
 And try visiting http://stevenxie.me to the see the result.
-
-[uptime-robot]: https://uptimerobot.com/dashboard.php
-[uptime-robot-status-img]: https://img.shields.io/uptimerobot/status/m781035502-a5dbe079527d0725ef6a18d9.svg
-[uptime-robot-ratio-img]: https://img.shields.io/uptimerobot/ratio/m781035502-a5dbe079527d0725ef6a18d9.svg
