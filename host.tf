@@ -42,7 +42,7 @@ resource "digitalocean_droplet" "primary" {
   // Automatically provision Docker Swarm:
   provisioner "remote-exec" {
     inline = [
-      "docker swarm init --advertise-addr $(curl ifconfig.co)"
+      "docker swarm init --advertise-addr $(curl ifconfig.co)",
     ]
   }
 }

@@ -2,6 +2,9 @@
 
 _Automated infrastructure for https://stevenxie.me and associated services._
 
+[![Uptime Robot: status][uptime-robot-status-img]][uptime-robot]
+[![Uptime Robot: ratio][uptime-robot-ratio-img]][uptime-robot]
+
 It is configured using [Terraform](https://www.terraform.io), and uses
 [CoreOS](https://coreos.com) as a platform OS. All services running on
 `grapevine` are meant to be run through [Docker](https://docker.com), and
@@ -29,6 +32,9 @@ configure your Git hooks to automatically check for updated secrets.
 > currently active, before generating infrastructure; otherwise, existing
 > systems may be overwritten.
 
+If this is a freshly cloned repository, run `make init` to download the
+necessary Terraform plugins.
+
 Run `make apply` to automatically generate the infrastructure on DigitalOcean
 and Cloudflare.
 
@@ -55,3 +61,7 @@ docker run -d --name hello-world -p 80:8000 crccheck/hello-world
 ```
 
 And try visiting http://stevenxie.me to the see the result.
+
+[uptime-robot]: https://uptimerobot.com/dashboard.php
+[uptime-robot-status-img]: https://img.shields.io/uptimerobot/status/m781035502-a5dbe079527d0725ef6a18d9.svg
+[uptime-robot-ratio-img]: https://img.shields.io/uptimerobot/ratio/m781035502-a5dbe079527d0725ef6a18d9.svg
