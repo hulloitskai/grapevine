@@ -1,0 +1,68 @@
+{
+    "ConfigVersion": 3,
+    "Driver": {
+        "IPAddress": "grapevine.stevenxie.me",
+        "MachineName": "grapevine",
+        "SSHUser": "admin",
+        "SSHPort": 22,
+        "SSHKeyPath": "$MCHDIR/machines/grapevine/id_ed25519.terraform",
+        "StorePath": "$MCHDIR",
+        "SwarmMaster": false,
+        "SwarmHost": "",
+        "SwarmDiscovery": "",
+        "EnginePort": 2376,
+        "SSHKey": "./auth/id_ed25519.terraform"
+    },
+    "DriverName": "generic",
+    "HostOptions": {
+        "Driver": "",
+        "Memory": 0,
+        "Disk": 0,
+        "EngineOptions": {
+            "ArbitraryFlags": [],
+            "Dns": null,
+            "GraphDir": "",
+            "Env": [],
+            "Ipv6": false,
+            "InsecureRegistry": [],
+            "Labels": [],
+            "LogLevel": "",
+            "StorageDriver": "",
+            "SelinuxEnabled": false,
+            "TlsVerify": true,
+            "RegistryMirror": [],
+            "InstallURL": "https://get.docker.com"
+        },
+        "SwarmOptions": {
+            "IsSwarm": false,
+            "Address": "",
+            "Discovery": "",
+            "Agent": false,
+            "Master": false,
+            "Host": "tcp://0.0.0.0:3376",
+            "Image": "swarm:latest",
+            "Strategy": "spread",
+            "Heartbeat": 0,
+            "Overcommit": 0,
+            "ArbitraryFlags": [],
+            "ArbitraryJoinFlags": [],
+            "Env": null,
+            "IsExperimental": false
+        },
+        "AuthOptions": {
+            "CertDir": "$MCHDIR/machines/grapevine/certs",
+            "CaCertPath": "$MCHDIR/machines/grapevine/certs/ca.pem",
+            "CaPrivateKeyPath": "$MCHDIR/machines/grapevine/certs/ca-key.pem",
+            "CaCertRemotePath": "",
+            "ServerCertPath": "$MCHDIR/machines/grapevine/server.pem",
+            "ServerKeyPath": "$MCHDIR/machines/grapevine/server-key.pem",
+            "ClientKeyPath": "$MCHDIR/machines/grapevine/certs/key.pem",
+            "ServerCertRemotePath": "",
+            "ServerKeyRemotePath": "",
+            "ClientCertPath": "$MCHDIR/machines/grapevine/certs/cert.pem",
+            "ServerCertSANs": [],
+            "StorePath": "$MCHDIR/machines/grapevine"
+        }
+    },
+    "Name": "grapevine"
+}
