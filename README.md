@@ -2,10 +2,10 @@
   <img src="./assets/icon.png" width="175px" title="Icon made by Freepik from www.flaticon.com" />
 </p>
 <p align="center">
-  <a href="https://uptimerobot.com/dashboard.php">
+  <a href="https://stats.uptimerobot.com/nOX2vTvGj">
     <img src="https://img.shields.io/uptimerobot/status/m781035502-a5dbe079527d0725ef6a18d9.svg" />
   </a>
-  <a href="https://uptimerobot.com/dashboard.php">
+  <a href="https://stats.uptimerobot.com/nOX2vTvGj">
     <img src="https://img.shields.io/uptimerobot/ratio/m781035502-a5dbe079527d0725ef6a18d9.svg" />
   </a>
 </p>
