@@ -57,7 +57,7 @@ and Cloudflare.
    to this Docker Machine into the current shell. _This step has to be run
    every time you want to access the remote Docker daemon._
 3. When you are done with deploying to the remote Docker daemon, switch back
-   to the local daemon by running `. unmachine.env.sh`.
+   to the local daemon by running `unmachine`.
 
 ### Example Deploy
 
